@@ -18,6 +18,7 @@ Untuk dapat mencapai tujuan di atas, kita dapat:
 
 ### Data Understanding
 Data yang digunakan pada proyek ini adalah data graduation rate dari blog [Royce Kimmons](http://roycekimmons.com/tools/generated_data/graduation_rate). Kumpulan data ini mencakup tingkat kelulusan dari perguruan tinggi empat tahun dengan berbagai faktor siswa.
+
 ![info](https://i.ibb.co/jGQL1ZF/Screenshot-54.png)
 
 Dari data diatas dapat diketahui terdapat 7 buah atribut, 1000 baris data dan tidak terdapat missing values. 
@@ -36,8 +37,9 @@ Berikut adalah visualisasi data untuk masing-masing atribut yang digunakan.
 _Sebaran Statistik Setiap Atribut_
 ![Stat](https://i.ibb.co/hmCpsZt/Screenshot-56.png)
 
-_Grafik Sebaran Parental Level of Education_
-![edu](https://i.ibb.co/jTzFTjp/Screenshot-58.png)
+_Grafik Sebaran Parental Level of Education_ 
+
+![edu](https://i.ibb.co/jTzFTjp/Screenshot-58.png) 
 
 Dari visualisasi & Sebaran Statistik diatas dapat disimpulkan :
 -  ACT composite score
@@ -83,7 +85,8 @@ Metrik yang dipilih adalah F1 Score, karena meskipun ini bukan masalah hidup dan
 Lebih lanjut, bayangkan jika mahasiswa yang sebenarnya akan lulus terlambat tetapi diprediksi lulus tepat waktu (false positif) maka tindakan preventif dari kampus tidak akan berguna. Dengan demikian, dalam masalah ini, sebisa mungkin kita memilih model dimana false positif dan false negatifnya rendah, sehingga metrik evaluasi yang digunakan adalah F1 Score. 
 
 Dari modeling dengan K Nearest Neighbours yang telah dibuat menghasilkan F1-score  yang telah ditune sebesar 0.831013916500994
-dan dibawah ini adalah tampilan confusion matrix untuk model KNN yang telah di tune 
+dan dibawah ini adalah tampilan confusion matrix untuk model KNN yang telah di tune  
+
 ![Confusion Matrix KNN Tuned](https://i.ibb.co/JF7F68K/Screenshot-57.png)
 
 Sedangkan berikut adalah cuplikan gambar dari [web ini](https://www.teknologi-bigdata.com/2020/05/validitas-rapid-test-covid-19-akurasi-accuracy-vs-f1-score.html#:~:text=F1%2Dscore%20digunakan%20ketika%20False,True%20Positive%20dan%20True%20Negative), yang menunjukkan cuplikan formula dari F1 Score. 
