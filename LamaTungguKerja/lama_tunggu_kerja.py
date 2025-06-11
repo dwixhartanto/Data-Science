@@ -1,6 +1,7 @@
 import streamlit as st
 import pickle
 import numpy as np
+import os # <--- ADD THIS LINE
 
 # Tambahkan ini
 
@@ -19,6 +20,10 @@ except FileNotFoundError:
     st.error("Error: 'model_knn.pkl' not found. Please make sure the model file is in the same directory.")
     st.stop()
 except Exception as e:
+    st.error(f"Terjadi kesalahan saat memuat model: {e}")
+    st.stop()
+
+# ... (sisa kode aplikasi Anda) ...
     st.error(f"Terjadi kesalahan saat memuat model: {e}")
     st.stop()
 
