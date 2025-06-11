@@ -18,9 +18,14 @@ st.title('Aplikasi Prediksi Waktu Tunggu Kerja')
 @st.cache_resource
 def load_model():
     """Memuat model KNN dari file pickle."""
-    model_path = 'model_knn.pkl'
+    # Menyesuaikan path model karena app.py berada di dalam subfolder 'LamaTungguKerja'
+    # dan Streamlit Cloud menjalankan dari root repositori.
+    # Jika model_knn.pkl berada di dalam folder 'LamaTungguKerja'
+    # bersama dengan lama_tunggu_kerja.py, maka path relatifnya adalah 'LamaTungguKerja/model_knn.pkl'
+    model_path = 'LamaTungguKerja/model_knn.pkl' # <--- PERUBAHAN UTAMA DI SINI
+
     if not os.path.exists(model_path):
-        st.error(f"Error: '{model_path}' tidak ditemukan. Pastikan file model berada di direktori yang sama.")
+        st.error(f"Error: '{model_path}' tidak ditemukan. Pastikan file model berada di direktori yang benar relatif terhadap root repositori Anda.")
         st.stop() # Hentikan eksekusi aplikasi jika model tidak ditemukan
     try:
         with open(model_path, 'rb') as file:
