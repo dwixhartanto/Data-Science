@@ -2,15 +2,37 @@ import streamlit as st
 import pickle
 import numpy as np
 
+# Tambahkan ini
+
+st.title('Aplikasi Prediksi Waktu Tunggu Kerja')
+
+# Debugging: Cetak daftar file di direktori kerja
+st.write("Files in current directory:")
+st.write(os.listdir('.')) # Ini akan mencetak daftar file dan folder di direktori root aplikasi
+
 # Load the trained KNN model
 try:
     with open('model_knn.pkl', 'rb') as file:
         knn_tuned = pickle.load(file)
+    st.success("Model 'model_knn.pkl' berhasil dimuat!") # Tambahkan ini jika berhasil
 except FileNotFoundError:
     st.error("Error: 'model_knn.pkl' not found. Please make sure the model file is in the same directory.")
     st.stop()
+except Exception as e:
+    st.error(f"Terjadi kesalahan saat memuat model: {e}")
+    st.stop()
 
-st.title('Aplikasi Prediksi Waktu Tunggu Kerja')
+# ... (sisa kode aplikasi Anda) ...
+
+# Load the trained KNN model
+#try:
+ #   with open('model_knn.pkl', 'rb') as file:
+  #      knn_tuned = pickle.load(file)
+#except FileNotFoundError:
+ #   st.error("Error: 'model_knn.pkl' not found. Please make sure the model file is in the same directory.")
+  #  st.stop()
+
+#st.title('Aplikasi Prediksi Waktu Tunggu Kerja')
 
 st.write('Aplikasi ini memprediksi waktu tunggu kerja alumni berdasarkan fakultas, IPK, dan lama studi.')
 
