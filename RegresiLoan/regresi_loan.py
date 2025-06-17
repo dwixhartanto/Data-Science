@@ -6,7 +6,7 @@ import os
 
 
 # --- Judul Aplikasi ---
-st.title("Aplikasi Prediksi Income Pinjaman V1")
+st.title("Aplikasi Prediksi Income Pinjaman")
 
 
 # --- Muat Model ---
