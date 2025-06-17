@@ -3,7 +3,7 @@ import pandas as pd
 import joblib
 
 # --- Judul Aplikasi ---
-st.title("Aplikasi Prediksi Income Pinjaman")
+st.title("Aplikasi Prediksi Income Pinjaman V2")
 
 # --- Muat Model ---
 # Pastikan file model Anda (regresi_loan.pkl) ada di direktori yang sama dengan aplikasi Streamlit Anda
