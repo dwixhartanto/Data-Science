@@ -8,17 +8,11 @@ import os
 # --- Judul Aplikasi ---
 st.title("Aplikasi Prediksi Income Pinjaman V1")
 
-# --- Debugging: Cek isi direktori ---
-st.write("Daftar file di direktori aplikasi:")
-files = os.listdir('.') # Dapatkan semua file di direktori saat ini
-for f in files:
-    st.write(f"- " + f) # Tulis setiap nama file ke Streamlit app
-# --- Akhir Debugging ---
 
 # --- Muat Model ---
 # Pastikan file model Anda (regresi_loan.pkl) ada di direktori yang sama dengan aplikasi Streamlit Anda
 try:
-    model = joblib.load('regresi.pkl')
+    model = joblib.load('RegresiLoan/regresi.pkl')
     st.success("Model 'reg_joblib' berhasil dimuat!")
 except FileNotFoundError:
     st.error("Error: Model 'reg_joblib' tidak ditemukan. Pastikan file model ada di direktori yang benar.")
