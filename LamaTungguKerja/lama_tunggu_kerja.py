@@ -10,7 +10,7 @@ st.set_page_config(
     initial_sidebar_state="auto"
 )
 
-st.header('Aplikasi Prediksi Waktu Tunggu Kerja')
+st.subheader('Aplikasi Prediksi Waktu Tunggu Kerja')
 
 
 # Memuat model
