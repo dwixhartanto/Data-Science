@@ -8,7 +8,7 @@ st.title("Aplikasi Prediksi Income Pinjaman")
 # --- Muat Model ---
 # Pastikan file model Anda (regresi_loan.pkl) ada di direktori yang sama dengan aplikasi Streamlit Anda
 try:
-    model = joblib.load('regresi_loan.pkl')
+    model = joblib.load('RegresiLoan/regresi_loan.pkl')
     st.success("Model 'regresi_loan.pkl' berhasil dimuat!")
 except FileNotFoundError:
     st.error("Error: Model 'regresi_loan.pkl' tidak ditemukan. Pastikan file model ada di direktori yang benar.")
