@@ -12,22 +12,10 @@ st.set_page_config(
 
 st.title('Aplikasi Prediksi Waktu Tunggu Kerja')
 
-# Fungsi untuk memuat model menggunakan cache Streamlit
-# Ini memastikan model hanya dimuat sekali saat aplikasi dijalankan,
-# bukan setiap kali ada interaksi pengguna, sehingga aplikasi lebih ringan.
-@st.cache_resource
-def load_model():
-    """Memuat model KNN dari file pickle."""
-    # Menyesuaikan path model karena app.py berada di dalam subfolder 'LamaTungguKerja'
-    # dan Streamlit Cloud menjalankan dari root repositori.
-    # Jika model_knn.pkl berada di dalam folder 'LamaTungguKerja'
-    # bersama dengan lama_tunggu_kerja.py, maka path relatifnya adalah 'LamaTungguKerja/model_knn.pkl'
-    model_path = 'LamaTungguKerja/model_knn.pkl' # <--- PERUBAHAN UTAMA DI SINI
-
 
 # Memuat model
 with open('LamaTungguKerja/model_knn.pkl', 'rb') as file: # Sesuaikan nama file
-knn_tuned = joblib.load(file)
+    knn_tuned = joblib.load(file)
 
 
 
