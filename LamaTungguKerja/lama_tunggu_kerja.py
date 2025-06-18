@@ -24,30 +24,11 @@ def load_model():
     # bersama dengan lama_tunggu_kerja.py, maka path relatifnya adalah 'LamaTungguKerja/model_knn.pkl'
     model_path = 'LamaTungguKerja/model_knn.pkl' # <--- PERUBAHAN UTAMA DI SINI
 
-    if not os.path.exists(model_path):
-        st.error(f"Error: '{model_path}' tidak ditemukan. Pastikan file model berada di direktori yang benar relatif terhadap root repositori Anda.")
-        st.stop() # Hentikan eksekusi aplikasi jika model tidak ditemukan
-    try:
-        with open(model_path, 'rb') as file:
-            knn_tuned = pickle.load(file)
-        st.success("Model 'model_knn.pkl' berhasil dimuat!")
-        return knn_tuned
-    except Exception as e:
-        st.error(f"Terjadi kesalahan saat memuat model: {e}")
-        st.stop() # Hentikan eksekusi aplikasi jika gagal memuat model
 
 # Memuat model
 knn_tuned = load_model()
 
-# Debugging: Cetak daftar file di direktori kerja
-st.subheader("Informasi Debugging:")
-st.write(f"Direktori kerja saat ini: `{os.getcwd()}`")
-st.write("Daftar file di direktori saat ini:")
-try:
-    st.code(os.listdir('.')) # Menampilkan daftar file dalam format kode
-except Exception as e:
-    st.warning(f"Tidak dapat membaca daftar direktori: {e}")
-st.markdown("---") # Garis pemisah untuk debugging info
+
 
 st.write('Aplikasi ini memprediksi waktu tunggu kerja alumni berdasarkan fakultas, IPK, dan lama studi.')
 
