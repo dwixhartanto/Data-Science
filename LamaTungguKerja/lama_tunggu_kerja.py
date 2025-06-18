@@ -1,5 +1,5 @@
 import streamlit as st
-import pickle
+import joblib
 import numpy as np
 import os # Import modul 'os' untuk operasi sistem file
 
@@ -26,7 +26,9 @@ def load_model():
 
 
 # Memuat model
-knn_tuned = load_model()
+  with open('LamaTungguKerja/model_knn.pkl', 'rb') as file: # Sesuaikan nama file
+        knn_tuned = joblib.load(file)
+
 
 
 
