@@ -26,8 +26,8 @@ def load_model():
 
 
 # Memuat model
-  with open('LamaTungguKerja/model_knn.pkl', 'rb') as file: # Sesuaikan nama file
-  knn_tuned = joblib.load(file)
+with open('LamaTungguKerja/model_knn.pkl', 'rb') as file: # Sesuaikan nama file
+knn_tuned = joblib.load(file)
 
 
 
