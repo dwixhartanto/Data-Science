@@ -18,7 +18,7 @@ Aplikasi ini memprediksi kategori masa tunggu pelamar berdasarkan data yang Anda
 # --- 1. Muat Model AdaBoost dan Encoder (HARUS SAMA DENGAN SAAT TRAINING) ---
 
 # Nama file model
-MODEL_FILE = 'Waktu Tunggu Kerja/adabostmodel.pkl'
+MODEL_FILE = 'adabostmodel.pkl'
 
 @st.cache_resource # Gunakan st.cache_resource untuk memuat model hanya sekali
 def load_model(model_path):
