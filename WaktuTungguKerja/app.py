@@ -10,7 +10,7 @@ st.set_page_config(
     layout="wide" # Menggunakan layout "wide" agar ada lebih banyak ruang horizontal
 )
 
-st.title("⏰ Prediksi Kategori Masa Tunggu Pelamar")
+st.header("⏰ Prediksi Kategori Masa Tunggu Pelamar")
 st.markdown("""
 Aplikasi ini memprediksi kategori masa tunggu pelamar berdasarkan data yang Anda masukkan.
 """)
