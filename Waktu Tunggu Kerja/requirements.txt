@@ -2,3 +2,4 @@ streamlit
 pandas
 category-encoders
 joblib
+scikit-learn
