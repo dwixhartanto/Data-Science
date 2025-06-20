@@ -10,7 +10,7 @@ st.set_page_config(
     layout="wide" # Menggunakan layout "wide" agar ada lebih banyak ruang horizontal
 )
 
-st.header("⏰ Prediksi Kategori Masa Tunggu Pelamar")
+st.subheader("⏰ Prediksi Kategori Masa Tunggu Pelamar")
 st.markdown("""
 Aplikasi ini memprediksi kategori masa tunggu pelamar berdasarkan data yang Anda masukkan.
 """)
@@ -24,7 +24,7 @@ MODEL_FILE = 'WaktuTungguKerja/adabostmodel.pkl'
 def load_model(model_path):
     try:
         model = joblib.load(model_path)
-        st.success(f"Model '{model_path}' berhasil dimuat.")
+     #   st.success(f"Model '{model_path}' berhasil dimuat.")
         return model
     except FileNotFoundError:
         st.error(f"Error: File model '{model_path}' tidak ditemukan. Pastikan file tersebut ada di direktori yang sama.")
