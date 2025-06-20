@@ -10,9 +10,9 @@ st.set_page_config(
     layout="wide" # Menggunakan layout "wide" agar ada lebih banyak ruang horizontal
 )
 
-st.subheader("⏰ Prediksi Kategori Masa Tunggu Pelamar")
+st.subheader("⏰ Prediksi Kategori Masa Tunggu Alumni")
 st.markdown("""
-Aplikasi ini memprediksi kategori masa tunggu pelamar berdasarkan data yang Anda masukkan.
+Aplikasi ini memprediksi kategori masa tunggu Alumni berdasarkan data yang Anda masukkan.
 """)
 
 # --- 1. Muat Model AdaBoost dan Encoder (HARUS SAMA DENGAN SAAT TRAINING) ---
@@ -76,7 +76,7 @@ encoder_X = get_encoder(feature_categorical_mapping, categorical_cols_to_encode)
 
 
 # --- 2. Input dari Pengguna via Streamlit (Menggunakan Kolom) ---
-st.header("Masukkan Data Pelamar:")
+st.header("Masukkan Data Alumni:")
 
 # Fungsi pembantu untuk mendapatkan opsi selectbox
 def get_selectbox_options(col_name):
@@ -92,7 +92,7 @@ with col1:
     st.subheader("Informasi Utama")
     ipk = st.slider("IPK", min_value=0.0, max_value=4.0, value=3.0, step=0.01,
                     help="Indeks Prestasi Kumulatif (0.0 - 4.0)")
-    sosmed = st.selectbox("Tingkat Sosmed", options=get_selectbox_options('Sosmed'))
+    sosmed = st.selectbox("Sosial Media", options=get_selectbox_options('Sosmed'))
     biaya_sumber = st.selectbox("Sumber Biaya", options=get_selectbox_options('biaya'), key='sumber_biaya_input')
 
 with col2:
