@@ -121,8 +121,8 @@ if st.button("Prediksi Kategori Masa Tunggu"):
         
         final_X_for_prediction = pd.concat([X_numeric, X_categorical_encoded], axis=1)
         
-        st.subheader("Data yang akan diprediksi (setelah encoding):")
-        st.dataframe(final_X_for_prediction)
+        st.subheader("Hasil Prediksi:")
+   #     st.dataframe(final_X_for_prediction)
 
         # Lakukan Prediksi
         prediksi_numerik = adaboost_model.predict(final_X_for_prediction)
