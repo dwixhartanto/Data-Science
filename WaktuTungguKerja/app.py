@@ -7,7 +7,7 @@ import category_encoders as ce
 st.set_page_config(
     page_title="Prediksi Kategori Masa Tunggu",
     page_icon="⏰",
-    layout="centered"
+    layout="wide" # Menggunakan layout "wide" agar ada lebih banyak ruang horizontal
 )
 
 st.title("⏰ Prediksi Kategori Masa Tunggu Pelamar")
@@ -28,7 +28,7 @@ def load_model(model_path):
         return model
     except FileNotFoundError:
         st.error(f"Error: File model '{model_path}' tidak ditemukan. Pastikan file tersebut ada di direktori yang sama.")
-        st.stop() # Hentikan eksekusi jika model tidak ditemukan
+        st.stop()
     except Exception as e:
         st.error(f"Error saat memuat model: {e}")
         st.stop()
@@ -55,7 +55,6 @@ inverse_target_mapping = {
 categorical_cols_to_encode = [m['col'] for m in feature_categorical_mapping]
 
 # Inisialisasi dan Fit encoder untuk fitur kategorikal (X)
-# Menggunakan st.cache_resource agar encoder hanya dibuat dan di-fit sekali
 @st.cache_resource
 def get_encoder(mapping_data, cols_to_encode):
     encoder = ce.OrdinalEncoder(
@@ -63,7 +62,6 @@ def get_encoder(mapping_data, cols_to_encode):
         return_df=True,
         mapping=mapping_data
     )
-    # Buat dummy DataFrame untuk fitting encoder
     dummy_data_dict = {}
     for m in mapping_data:
         col_name = m['col']
@@ -75,64 +73,56 @@ def get_encoder(mapping_data, cols_to_encode):
     return encoder
 
 encoder_X = get_encoder(feature_categorical_mapping, categorical_cols_to_encode)
-# st.success("Encoder berhasil di-fit dengan mapping yang disediakan.") # Tidak perlu ditampilkan di UI
 
 
-# --- 2. Input dari Pengguna via Streamlit ---
+# --- 2. Input dari Pengguna via Streamlit (Menggunakan Kolom) ---
 st.header("Masukkan Data Pelamar:")
 
-# Input IPK (Numerik)
-ipk = st.slider("IPK", min_value=0.0, max_value=4.0, value=3.0, step=0.01,
-                help="Indeks Prestasi Kumulatif (0.0 - 4.0)")
-
-# Input Fitur Kategorikal menggunakan st.selectbox
+# Fungsi pembantu untuk mendapatkan opsi selectbox
 def get_selectbox_options(col_name):
     for m in feature_categorical_mapping:
         if m['col'] == col_name:
             return list(m['mapping'].keys())
-    return [] # Mengembalikan list kosong jika mapping tidak ditemukan
+    return []
 
-sosmed = st.selectbox("Tingkat Sosmed", options=get_selectbox_options('Sosmed'))
-biaya_sumber = st.selectbox("Sumber Biaya", options=get_selectbox_options('biaya'), key='sumber_biaya_input') # Menggunakan 'biaya' karena itu nama kolomnya
-b_inggris = st.selectbox("Kemampuan Bahasa Inggris", options=get_selectbox_options('b Inggris'))
-it = st.selectbox("Kemampuan IT", options=get_selectbox_options('IT'))
-komunikasi = st.selectbox("Kemampuan Komunikasi", options=get_selectbox_options('Komunikasi'))
+# Membuat 2 kolom untuk input
+col1, col2 = st.columns(2) # Membagi layar menjadi 2 kolom dengan lebar yang sama
 
-# --- 3. Tombol Prediksi ---
+with col1:
+    st.subheader("Informasi Utama")
+    ipk = st.slider("IPK", min_value=0.0, max_value=4.0, value=3.0, step=0.01,
+                    help="Indeks Prestasi Kumulatif (0.0 - 4.0)")
+    sosmed = st.selectbox("Tingkat Sosmed", options=get_selectbox_options('Sosmed'))
+    biaya_sumber = st.selectbox("Sumber Biaya", options=get_selectbox_options('biaya'), key='sumber_biaya_input')
+
+with col2:
+    st.subheader("Kemampuan Tambahan")
+    b_inggris = st.selectbox("Kemampuan Bahasa Inggris", options=get_selectbox_options('b Inggris'))
+    it = st.selectbox("Kemampuan IT", options=get_selectbox_options('IT'))
+    komunikasi = st.selectbox("Kemampuan Komunikasi", options=get_selectbox_options('Komunikasi'))
+
+# Tombol Prediksi di luar kolom agar selalu di bawah input
 if st.button("Prediksi Kategori Masa Tunggu"):
     # Buat DataFrame dari input user
     user_data_raw = pd.DataFrame({
         'IPK': [ipk],
         'Sosmed': [sosmed],
-        'biaya': [biaya_sumber], # Menggunakan nama kolom 'biaya' untuk input sumber biaya
+        'biaya': [biaya_sumber],
         'b Inggris': [b_inggris],
         'IT': [it],
         'Komunikasi': [komunikasi]
     })
 
-    # Pastikan urutan kolom sesuai dengan yang diharapkan model setelah encoding
-    # Kolom numerik + kolom kategorikal (diurutkan berdasarkan mapping)
-    # PENTING: Urutan kolom ini HARUS SAMA DENGAN URUTAN KOLOM YANG DIGUNAKAN SAAT MELATIH MODEL!
-    # Jika Anda memiliki daftar urutan kolom dari training:
-    # all_model_columns_order = ['IPK', 'Sosmed', 'biaya', 'b Inggris', 'IT', 'Komunikasi']
-    # user_data_raw = user_data_raw[all_model_columns_order]
-
     try:
-        # Pisahkan kolom numerik dan kategorikal untuk transformasi
         X_numeric = user_data_raw[['IPK']].copy()
         X_categorical_raw = user_data_raw[categorical_cols_to_encode].copy()
         
-        # Transformasi kolom kategorikal
         X_categorical_encoded = encoder_X.transform(X_categorical_raw)
         
-        # Gabungkan kembali kolom numerik dan yang sudah di-encode
         final_X_for_prediction = pd.concat([X_numeric, X_categorical_encoded], axis=1)
-
-        # Jika ada urutan kolom spesifik yang digunakan saat training model:
-        # final_X_for_prediction = final_X_for_prediction[your_exact_training_columns_order]
         
         st.subheader("Data yang akan diprediksi (setelah encoding):")
-        st.dataframe(final_X_for_prediction) # Tampilkan data yang akan masuk ke model
+        st.dataframe(final_X_for_prediction)
 
         # Lakukan Prediksi
         prediksi_numerik = adaboost_model.predict(final_X_for_prediction)
