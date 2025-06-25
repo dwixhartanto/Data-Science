@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import scikit-learn
 
 # --- Judul Aplikasi ---
 st.title("Aplikasi Prediksi Income Pinjaman")
