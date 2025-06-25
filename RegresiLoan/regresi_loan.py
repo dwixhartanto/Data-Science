@@ -18,7 +18,7 @@ st.markdown("Aplikasi ini memprediksi *income* berdasarkan *Age* (Usia) dan *Exp
 # CATATAN PENTING:
 # Pastikan file model 'regresi_loan.pkl' ada di repositori GitHub Anda
 # di lokasi yang sama dengan file app.py ini.
-model_path = 'regresi_loan.pkl'
+model_path = 'Data-Science/regresi_loan.pkl'
 
 try:
     model = joblib.load(model_path)
