@@ -3,7 +3,7 @@ import pandas as pd
 import joblib
 
 # --- Judul Aplikasi ---
-st.title('Prediksi Kategori Waktu Lulus Mahasiswa')
+st.subtitle('Prediksi Kategori Waktu Lulus Mahasiswa')
 st.write('Aplikasi ini memprediksi apakah seorang mahasiswa akan lulus "Tepat Waktu" atau "Terlambat" berdasarkan beberapa parameter.')
 
 # --- Memuat Model ---
